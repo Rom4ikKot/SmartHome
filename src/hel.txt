@@ -1,0 +1,480 @@
+==24442== Helgrind, a thread error detector
+==24442== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==24442== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==24442== Command: ./main
+==24442== Parent PID: 24441
+==24442== 
+==24442== ---Thread-Announcement------------------------------------------
+==24442== 
+==24442== Thread #3 was created
+==24442==    at 0x592787E: clone (clone.S:71)
+==24442==    by 0x55EEEC4: create_thread (createthread.c:100)
+==24442==    by 0x55EEEC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==24442==    by 0x4C36C91: pthread_create_WRK (hg_intercepts.c:427)
+==24442==    by 0x4C37D75: pthread_create@* (hg_intercepts.c:460)
+==24442==    by 0x13ACC3: advcpp::Thread::Thread(std::tr1::shared_ptr<advcpp::Runnable>&) (thread.cpp:92)
+==24442==    by 0x13B410: advcpp::ABCSensorAgent::RunThread() (abcsensoragent.cpp:39)
+==24442==    by 0x13C6F4: advcpp::IAgent::Activate() (iagent.cpp:23)
+==24442==    by 0x131350: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:32)
+==24442==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Thread #3: pthread_cond_{signal,broadcast}: dubious: associated lock is not held by any thread
+==24442==    at 0x4C349E5: pthread_cond_signal_WRK (hg_intercepts.c:1384)
+==24442==    by 0x4C381A0: pthread_cond_signal@* (hg_intercepts.c:1405)
+==24442==    by 0x13A25F: advcpp::CondVar::Signal() (condvar.cpp:43)
+==24442==    by 0x1374CB: advcpp::WaitableQueue<std::tr1::shared_ptr<advcpp::Event> >::Enqueue(std::tr1::shared_ptr<advcpp::Event> const&) (waitablequeue.h:73)
+==24442==    by 0x136F7E: advcpp::EventContainer::Enqueue(std::tr1::shared_ptr<advcpp::Event> const&) (eventcontainer.cpp:20)
+==24442==    by 0x6B985F4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== ---Thread-Announcement------------------------------------------
+==24442== 
+==24442== Thread #4 was created
+==24442==    at 0x592787E: clone (clone.S:71)
+==24442==    by 0x55EEEC4: create_thread (createthread.c:100)
+==24442==    by 0x55EEEC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==24442==    by 0x4C36C91: pthread_create_WRK (hg_intercepts.c:427)
+==24442==    by 0x4C37D75: pthread_create@* (hg_intercepts.c:460)
+==24442==    by 0x13ACC3: advcpp::Thread::Thread(std::tr1::shared_ptr<advcpp::Runnable>&) (thread.cpp:92)
+==24442==    by 0x13B410: advcpp::ABCSensorAgent::RunThread() (abcsensoragent.cpp:39)
+==24442==    by 0x13C6F4: advcpp::IAgent::Activate() (iagent.cpp:23)
+==24442==    by 0x131350: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:32)
+==24442==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FACD30 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C38E3D: strlen (vg_replace_strmem.c:461)
+==24442==    by 0x58D945F: __tzstring (tzset.c:122)
+==24442==    by 0x58DB82D: __tzfile_compute (tzfile.c:760)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Address 0x5facd30 is 1,440 bytes inside a block of size 1,483 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58DAB99: __tzfile_read (tzfile.c:279)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FACD31 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C38E4B: strlen (vg_replace_strmem.c:461)
+==24442==    by 0x58D945F: __tzstring (tzset.c:122)
+==24442==    by 0x58DB82D: __tzfile_compute (tzfile.c:760)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Address 0x5facd31 is 1,441 bytes inside a block of size 1,483 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58DAB99: __tzfile_read (tzfile.c:279)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ---Thread-Announcement------------------------------------------
+==24442== 
+==24442== Thread #1 is the program's root thread
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FAAB20 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C3B41C: bcmp (vg_replace_strmem.c:1113)
+==24442==    by 0x58D94A0: __tzstring_len (tzset.c:94)
+==24442==    by 0x58D94A0: __tzstring (tzset.c:122)
+==24442==    by 0x58DB82D: __tzfile_compute (tzfile.c:760)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== This conflicts with a previous write of size 1 by thread #1
+==24442== Locks held: none
+==24442==    at 0x4C3B7FF: memmove (vg_replace_strmem.c:1271)
+==24442==    by 0x516AAAC: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==24442==    by 0x516AE18: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+==24442==    by 0x13C9BF: advcpp::Factory::adder(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (factory.cpp:19)
+==24442==    by 0x13CB04: advcpp::Factory::GetAgents(std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >&) (factory.cpp:30)
+==24442==    by 0x1312E7: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:28)
+==24442==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442==  Address 0x5faab20 is 16 bytes inside a block of size 20 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58D94F8: __tzstring_len (tzset.c:99)
+==24442==    by 0x58D94F8: __tzstring (tzset.c:122)
+==24442==    by 0x58DB31B: __tzfile_read (tzfile.c:463)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FAB441 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C3B42F: bcmp (vg_replace_strmem.c:1113)
+==24442==    by 0x58D94A0: __tzstring_len (tzset.c:94)
+==24442==    by 0x58D94A0: __tzstring (tzset.c:122)
+==24442==    by 0x58DB82D: __tzfile_compute (tzfile.c:760)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Address 0x5fab441 is 17 bytes inside a block of size 20 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58D94B5: __tzstring_len (tzset.c:99)
+==24442==    by 0x58D94B5: __tzstring (tzset.c:122)
+==24442==    by 0x58DB31B: __tzfile_read (tzfile.c:463)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FACD34 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C38E3D: strlen (vg_replace_strmem.c:461)
+==24442==    by 0x58D945F: __tzstring (tzset.c:122)
+==24442==    by 0x58DB887: __tzfile_compute (tzfile.c:770)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Address 0x5facd34 is 1,444 bytes inside a block of size 1,483 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58DAB99: __tzfile_read (tzfile.c:279)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FACD35 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C38E4B: strlen (vg_replace_strmem.c:461)
+==24442==    by 0x58D945F: __tzstring (tzset.c:122)
+==24442==    by 0x58DB887: __tzfile_compute (tzfile.c:770)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Address 0x5facd35 is 1,445 bytes inside a block of size 1,483 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58DAB99: __tzfile_read (tzfile.c:279)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FA7D40 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C3B41C: bcmp (vg_replace_strmem.c:1113)
+==24442==    by 0x58D94A0: __tzstring_len (tzset.c:94)
+==24442==    by 0x58D94A0: __tzstring (tzset.c:122)
+==24442==    by 0x58DB887: __tzfile_compute (tzfile.c:770)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== This conflicts with a previous write of size 8 by thread #1
+==24442== Locks held: none
+==24442==    at 0x130CE6: std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > >::pop_front() (stl_deque.h:1586)
+==24442==    by 0x130BF1: std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >::pop() (stl_queue.h:287)
+==24442==    by 0x13CB4D: advcpp::Factory::GetAgents(std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >&) (factory.cpp:32)
+==24442==    by 0x1312E7: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:28)
+==24442==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442==  Address 0x5fa7d40 is 16 bytes inside a block of size 20 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58D94B5: __tzstring_len (tzset.c:99)
+==24442==    by 0x58D94B5: __tzstring (tzset.c:122)
+==24442==    by 0x58DB31B: __tzfile_read (tzfile.c:463)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FA7D41 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C3B42F: bcmp (vg_replace_strmem.c:1113)
+==24442==    by 0x58D94A0: __tzstring_len (tzset.c:94)
+==24442==    by 0x58D94A0: __tzstring (tzset.c:122)
+==24442==    by 0x58DB887: __tzfile_compute (tzfile.c:770)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== This conflicts with a previous write of size 8 by thread #1
+==24442== Locks held: none
+==24442==    at 0x130CE6: std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > >::pop_front() (stl_deque.h:1586)
+==24442==    by 0x130BF1: std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >::pop() (stl_queue.h:287)
+==24442==    by 0x13CB4D: advcpp::Factory::GetAgents(std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >&) (factory.cpp:32)
+==24442==    by 0x1312E7: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:28)
+==24442==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442==  Address 0x5fa7d41 is 17 bytes inside a block of size 20 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58D94B5: __tzstring_len (tzset.c:99)
+==24442==    by 0x58D94B5: __tzstring (tzset.c:122)
+==24442==    by 0x58DB31B: __tzfile_read (tzfile.c:463)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FAB443 by thread #4
+==24442== Locks held: none
+==24442==    at 0x4C397EB: strcmp (vg_replace_strmem.c:849)
+==24442==    by 0x58DB942: __tzfile_compute (tzfile.c:800)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Address 0x5fab443 is 19 bytes inside a block of size 20 alloc'd
+==24442==    at 0x4C312B6: malloc (vg_replace_malloc.c:309)
+==24442==    by 0x58D94B5: __tzstring_len (tzset.c:99)
+==24442==    by 0x58D94B5: __tzstring (tzset.c:122)
+==24442==    by 0x58DB31B: __tzfile_read (tzfile.c:463)
+==24442==    by 0x58DA5C7: tzset_internal (tzset.c:406)
+==24442==    by 0x58DA5C7: __tz_convert (tzset.c:584)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442==  Block was alloc'd by thread #3
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 4 at 0x5BF66C0 by thread #4
+==24442== Locks held: none
+==24442==    at 0x139663: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== This conflicts with a previous write of size 4 by thread #3
+==24442== Locks held: none
+==24442==    at 0x58DB927: __tzfile_compute (tzfile.c:799)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6B985E4: advcpp::FireSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==  Address 0x5bf66c0 is 32 bytes inside data symbol "_tmbuf"
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Thread #4: pthread_cond_{signal,broadcast}: dubious: associated lock is not held by any thread
+==24442==    at 0x4C349E5: pthread_cond_signal_WRK (hg_intercepts.c:1384)
+==24442==    by 0x4C381A0: pthread_cond_signal@* (hg_intercepts.c:1405)
+==24442==    by 0x13A25F: advcpp::CondVar::Signal() (condvar.cpp:43)
+==24442==    by 0x1374CB: advcpp::WaitableQueue<std::tr1::shared_ptr<advcpp::Event> >::Enqueue(std::tr1::shared_ptr<advcpp::Event> const&) (waitablequeue.h:73)
+==24442==    by 0x136F7E: advcpp::EventContainer::Enqueue(std::tr1::shared_ptr<advcpp::Event> const&) (eventcontainer.cpp:20)
+==24442==    by 0x6D9D9EF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 4 at 0x5BF66C0 by thread #1
+==24442== Locks held: none
+==24442==    at 0x139663: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x1315A2: advcpp::SmartHome::Stop() (smarthome.cpp:49)
+==24442==    by 0x12FEDB: SMARTHOME() (main.cpp:105)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442== 
+==24442== This conflicts with a previous write of size 4 by thread #4
+==24442== Locks held: none
+==24442==    at 0x58DB927: __tzfile_compute (tzfile.c:799)
+==24442==    by 0x58DA51D: __tz_convert (tzset.c:587)
+==24442==    by 0x13963C: advcpp::Event::Event(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::pair<int, int> const&) (event.cpp:12)
+==24442==    by 0x13B359: advcpp::ABCSensorAgent::CreateEvent(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (abcsensoragent.cpp:29)
+==24442==    by 0x6D9D9DF: advcpp::TempSensA::Run() (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/tempsensa.so)
+==24442==    by 0x13C210: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:17)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==  Address 0x5bf66c0 is 32 bytes inside data symbol "_tmbuf"
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Thread #1: pthread_cond_{signal,broadcast}: dubious: associated lock is not held by any thread
+==24442==    at 0x4C349E5: pthread_cond_signal_WRK (hg_intercepts.c:1384)
+==24442==    by 0x4C381A0: pthread_cond_signal@* (hg_intercepts.c:1405)
+==24442==    by 0x13A25F: advcpp::CondVar::Signal() (condvar.cpp:43)
+==24442==    by 0x1374CB: advcpp::WaitableQueue<std::tr1::shared_ptr<advcpp::Event> >::Enqueue(std::tr1::shared_ptr<advcpp::Event> const&) (waitablequeue.h:73)
+==24442==    by 0x136F7E: advcpp::EventContainer::Enqueue(std::tr1::shared_ptr<advcpp::Event> const&) (eventcontainer.cpp:20)
+==24442==    by 0x1315D9: advcpp::SmartHome::Stop() (smarthome.cpp:50)
+==24442==    by 0x12FEDB: SMARTHOME() (main.cpp:105)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442== 
+==24442== ----------------------------------------------------------------
+==24442== 
+==24442== Possible data race during read of size 1 at 0x5FA8960 by thread #3
+==24442== Locks held: none
+==24442==    at 0x13C1EA: advcpp::ABCSensorRunnable::Run() (abcsensorrunnable.cpp:15)
+==24442==    by 0x13ABA9: advcpp::Thread::StartWorkRutine(void*) (thread.cpp:72)
+==24442==    by 0x4C36E85: mythread_wrapper (hg_intercepts.c:389)
+==24442==    by 0x55EE6DA: start_thread (pthread_create.c:463)
+==24442==    by 0x592788E: clone (clone.S:95)
+==24442== 
+==24442== This conflicts with a previous write of size 1 by thread #1
+==24442== Locks held: none
+==24442==    at 0x13B2E8: advcpp::ABCSensorAgent::Stop() (abcsensoragent.cpp:23)
+==24442==    by 0x13C80B: advcpp::IAgent::Stop() (iagent.cpp:35)
+==24442==    by 0x131624: advcpp::SmartHome::Stop() (smarthome.cpp:54)
+==24442==    by 0x12FEDB: SMARTHOME() (main.cpp:105)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442==  Address 0x5fa8960 is 80 bytes inside a block of size 152 alloc'd
+==24442==    at 0x4C318D6: operator new(unsigned long) (vg_replace_malloc.c:344)
+==24442==    by 0x6B986E3: Create (in /home/student2-5/work/advcpp/smarthome_v1.5/lib/firesensa.so)
+==24442==    by 0x13CB1E: advcpp::Factory::GetAgents(std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >&) (factory.cpp:30)
+==24442==    by 0x1312E7: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:28)
+==24442==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==24442==    by 0x130477: main (main.cpp:119)
+==24442==  Block was alloc'd by thread #1
+==24442== 
+==24442== 
+==24442== Use --history-level=approx or =none to gain increased speed, at
+==24442== the cost of reduced accuracy of conflicting-access information
+==24442== For lists of detected and suppressed errors, rerun with: -s
+==24442== ERROR SUMMARY: 41 errors from 15 contexts (suppressed: 328 from 133)

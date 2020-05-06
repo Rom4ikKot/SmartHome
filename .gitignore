@@ -7,7 +7,7 @@
 *.out
 *.o
 *.a
-*.so
+#*.so
 *.exe
 *.gch
 #Makefile

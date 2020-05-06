@@ -1,0 +1,29 @@
+==23996== Memcheck, a memory error detector
+==23996== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23996== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==23996== Command: ./main
+==23996== Parent PID: 23995
+==23996== 
+==23996== 
+==23996== HEAP SUMMARY:
+==23996==     in use at exit: 32 bytes in 1 blocks
+==23996==   total heap usage: 291 allocs, 290 frees, 113,364 bytes allocated
+==23996== 
+==23996== 32 bytes in 1 blocks are still reachable in loss record 1 of 1
+==23996==    at 0x4C31FAC: calloc (vg_replace_malloc.c:762)
+==23996==    by 0x4E3E7E4: _dlerror_run (dlerror.c:140)
+==23996==    by 0x4E3E050: dlopen@@GLIBC_2.2.5 (dlopen.c:87)
+==23996==    by 0x13D954: advcpp::DLOpen::GetFunc(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (dlopen.cpp:22)
+==23996==    by 0x13CB0F: advcpp::Factory::GetAgents(std::queue<std::tr1::shared_ptr<advcpp::Params>, std::deque<std::tr1::shared_ptr<advcpp::Params>, std::allocator<std::tr1::shared_ptr<advcpp::Params> > > >&) (factory.cpp:30)
+==23996==    by 0x1312E7: advcpp::SmartHome::SmartHome(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (smarthome.cpp:28)
+==23996==    by 0x12FEA9: SMARTHOME() (main.cpp:103)
+==23996==    by 0x130477: main (main.cpp:119)
+==23996== 
+==23996== LEAK SUMMARY:
+==23996==    definitely lost: 0 bytes in 0 blocks
+==23996==    indirectly lost: 0 bytes in 0 blocks
+==23996==      possibly lost: 0 bytes in 0 blocks
+==23996==    still reachable: 32 bytes in 1 blocks
+==23996==         suppressed: 0 bytes in 0 blocks
+==23996== 
+==23996== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
